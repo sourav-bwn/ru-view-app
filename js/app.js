@@ -36,12 +36,12 @@ function navigateTo(page) {
 // === SENSING ENGINE ===
 class SensingEngine {
     constructor() {
-        this.personCount = 0;
-        this.breathing = { rate: 16, confidence: 0 };
-        this.heart = { rate: 72, confidence: 0 };
-        this.presence = false;
-        this.csiValues = Array(30).fill(0);
-        this.targets = { persons: 0, breathing: 16, heart: 72 };
+        this.personCount = 2;
+        this.breathing = { rate: 18, confidence: 85 };
+        this.heart = { rate: 75, confidence: 82 };
+        this.presence = true;
+        this.csiValues = Array(30).fill(0.5);
+        this.targets = { persons: 2, breathing: 18, heart: 75 };
     }
 
     tick() {
@@ -434,22 +434,28 @@ function initSettings() {
 // === SCENARIO SIMULATION ===
 function runScenario() {
     const scenarios = [
-        { persons: 0, breathing: 16, heart: 72, dur: 4000 },
-        { persons: 1, breathing: 18, heart: 75, dur: 5000 },
-        { persons: 2, breathing: 20, heart: 85, dur: 4000 },
-        { persons: 1, breathing: 14, heart: 68, dur: 3000 },
-        { persons: 3, breathing: 22, heart: 90, dur: 4000 },
+        { persons: 2, breathing: 18, heart: 75, dur: 5000 },
+        { persons: 3, breathing: 22, heart: 88, dur: 4000 },
+        { persons: 1, breathing: 14, heart: 68, dur: 4000 },
+        { persons: 2, breathing: 20, heart: 82, dur: 5000 },
+        { persons: 1, breathing: 16, heart: 72, dur: 3000 },
         { persons: 0, breathing: 16, heart: 72, dur: 3000 },
     ];
 
-    let idx = 0;
+    // Start immediately with first scenario
+    let sc = scenarios[0];
+    engine.setPersons(sc.persons);
+    engine.setBreathing(sc.breathing);
+    engine.setHeart(sc.heart);
+
+    let idx = 1;
     setInterval(() => {
-        const sc = scenarios[idx % scenarios.length];
+        sc = scenarios[idx % scenarios.length];
         engine.setPersons(sc.persons);
         engine.setBreathing(sc.breathing);
         engine.setHeart(sc.heart);
         idx++;
-    }, 6000);
+    }, 5000);
 }
 
 // === MENU TOGGLE ===
