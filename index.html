@@ -40,21 +40,29 @@
                     <div class="hero-icon">
                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
                     </div>
-                    <h1>See Through Walls<br><span class="highlight">With WiFi</span></h1>
-                    <p class="hero-sub">Turn ordinary WiFi signals into real-time spatial intelligence. Detect people, measure vital signs, and track movement — through walls, in the dark, no cameras needed.</p>
+                    <h1>Real WiFi<br><span class="highlight">Device Radar</span></h1>
+                    <p class="hero-sub">Detects <strong>actual devices</strong> connected to your WiFi network or hotspot in real-time. See everyone connected — their signal strength, activity, and connection status. No fake data.</p>
                     <div class="hero-actions">
-                        <button class="btn btn-primary" onclick="navigateTo('dashboard')">Live Dashboard</button>
+                        <button class="btn btn-primary" onclick="navigateTo('dashboard')">Live Radar</button>
                         <button class="btn btn-outline" onclick="navigateTo('about')">How It Works</button>
+                    </div>
+                    <div id="heroDeviceBar" style="margin-top:16px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);display:none">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <span style="font-size:13px;font-weight:600">Devices on Network</span>
+                            <span id="heroDeviceCount" style="font-size:24px;font-weight:700;color:var(--accent)">0</span>
+                        </div>
+                        <div id="heroDeviceList" style="margin-top:8px;font-size:12px;color:var(--text2)"></div>
                     </div>
                 </div>
 
                 <div class="features-grid">
-                    <div class="feature-card" onclick="navigateTo('dashboard')">
-                        <div class="feature-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <div class="feature-card" onclick="navigateTo('dashboard')" style="background:var(--accent-dim);border-color:var(--accent)">
+                        <div class="feature-icon" style="color:var(--green)">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
                         </div>
-                        <h3>Through-Wall Sensing</h3>
-                        <p>Detect and track people through walls using CSI signal analysis</p>
+                        <h3>Live Network Radar</h3>
+                        <p>Detects <strong>real devices</strong> connected to your WiFi or hotspot in real-time</p>
+                        <div id="homeDeviceCount" style="margin-top:6px;font-size:12px;color:var(--accent);font-weight:700">Scanning...</div>
                     </div>
                     <div class="feature-card" onclick="navigateTo('vitals')">
                         <div class="feature-icon">
@@ -167,11 +175,28 @@
 
                     <div class="card full-width">
                         <div class="card-header">
-                            <h3>Detected Persons</h3>
+                            <h3>WiFi Radar</h3>
+                            <span class="badge badge-live" id="radarCount">0 devices</span>
+                        </div>
+                        <div class="card-body center">
+                            <div id="radarContainer" style="position:relative;width:100%;max-width:280px;aspect-ratio:1">
+                                <canvas id="radarCanvas" width="280" height="280" style="width:100%;height:100%"></canvas>
+                                <!-- Device dots rendered on canvas -->
+                            </div>
+                            <div style="font-size:11px;color:var(--text3);margin-top:4px">
+                                <span class="pulse-dot"></span> Closer to center = stronger signal
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card full-width">
+                        <div class="card-header">
+                            <h3>Detected Devices</h3>
+                            <span id="deviceCountBadge" class="badge badge-idle">0</span>
                         </div>
                         <div class="card-body">
                             <div id="personsList" class="persons-list">
-                                <div class="empty-state">No persons detected</div>
+                                <div class="empty-state">No devices detected on your network</div>
                             </div>
                         </div>
                     </div>
