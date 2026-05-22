@@ -19,7 +19,12 @@ const APP = {
     }
 };
 
-const WS_URL = `ws://${location.hostname}:8742`;
+// Connect to same origin (when served by the RuView server)
+// Falls back to port 8742 if served from GitHub Pages
+const PROTO = location.protocol === 'https:' ? 'wss:' : 'ws:';
+const WS_URL = `${PROTO}//${location.hostname}:8742`;
+// If we're on the same origin as the server (port 8742), use relative path
+const WS_SAME_ORIGIN = location.port === '8742' || location.port === '8742';
 
 // === NAVIGATION ===
 function navigateTo(page) {
@@ -39,8 +44,13 @@ let ws = null;
 function connectWebSocket() {
     if (ws && ws.readyState === WebSocket.OPEN) return;
 
+    // Try same-origin WebSocket first (when served by the RuView scanner server)
+    const wsUrl = location.port === '8742' || !location.port || location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+        ? `${PROTO}//${location.hostname}:8742`
+        : WS_URL;
+
     try {
-        ws = new WebSocket(WS_URL);
+        ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
             console.log('[WS] Connected to RuView Scanner');
