@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0e17">
+    <meta name="description" content="RuView - Turn WiFi into spatial intelligence. Detect people, measure vitals, track movement through walls.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>RuView — WiFi Spatial Intelligence</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <header id="header">
+            <div class="header-left">
+                <button id="menuBtn" class="icon-btn" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                </button>
+                <div class="brand">
+                    <span class="brand-icon">π</span>
+                    <span class="brand-text">RuView</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <span id="headerStatus" class="status-badge">Offline</span>
+            </div>
+            <div class="header-right">
+                <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <main id="mainContent">
+            <!-- Home -->
+            <section id="page-home" class="page active">
+                <div class="hero">
+                    <div class="hero-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>
+                    </div>
+                    <h1>See Through Walls<br><span class="highlight">With WiFi</span></h1>
+                    <p class="hero-sub">Turn ordinary WiFi signals into real-time spatial intelligence. Detect people, measure vital signs, and track movement — through walls, in the dark, no cameras needed.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="navigateTo('dashboard')">Live Dashboard</button>
+                        <button class="btn btn-outline" onclick="navigateTo('about')">How It Works</button>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card" onclick="navigateTo('dashboard')">
+                        <div class="feature-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <h3>Through-Wall Sensing</h3>
+                        <p>Detect and track people through walls using CSI signal analysis</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('vitals')">
+                        <div class="feature-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <h3>Vital Signs</h3>
+                        <p>Contactless breathing & heart rate monitoring while sitting or sleeping</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('dashboard')">
+                        <div class="feature-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Multi-Person Tracking</h3>
+                        <p>Detect and track multiple people simultaneously with unique IDs</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('dashboard')">
+                        <div class="feature-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Privacy First</h3>
+                        <p>No cameras, no video, no wearables. Just radio frequency analysis</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('hardware')">
+                        <div class="feature-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        </div>
+                        <h3>$9 Edge Hardware</h3>
+                        <p>Runs on ESP32-S3 nodes. No cloud, no internet required</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('about')">
+                        <div class="feature-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <h3>Fall Detection</h3>
+                        <p>Phase-acceleration based fall detection with alert system</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard -->
+            <section id="page-dashboard" class="page">
+                <div class="page-header">
+                    <h2>Live Dashboard</h2>
+                    <span id="dataSource" class="badge badge-sim">SIMULATED</span>
+                </div>
+
+                <div class="dash-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Presence</h3>
+                            <span id="presenceStatus" class="badge badge-idle">Scanning...</span>
+                        </div>
+                        <div class="card-body center">
+                            <div id="presenceDisplay" class="presence-display">
+                                <div class="presence-ring">
+                                    <svg width="140" height="140" viewBox="0 0 140 140">
+                                        <circle cx="70" cy="70" r="60" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+                                        <circle id="presenceArc" cx="70" cy="70" r="60" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="377" stroke-dashoffset="377" transform="rotate(-90 70 70)" stroke-linecap="round"/>
+                                        <text id="presenceCount" x="70" y="60" text-anchor="middle" class="presence-count">0</text>
+                                        <text x="70" y="80" text-anchor="middle" class="presence-label">People</text>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Vital Signs</h3>
+                            <span class="badge badge-live">LIVE</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="vital-row">
+                                <span class="vital-label">Breathing</span>
+                                <span id="breathingRate" class="vital-value">--</span>
+                                <span class="vital-unit">BPM</span>
+                            </div>
+                            <div class="vital-bar"><div id="breathingBar" class="vital-fill breath" style="width:0%"></div></div>
+                            <div class="vital-row">
+                                <span class="vital-label">Heart Rate</span>
+                                <span id="heartRate" class="vital-value">--</span>
+                                <span class="vital-unit">BPM</span>
+                            </div>
+                            <div class="vital-bar"><div id="heartBar" class="vital-fill heart" style="width:0%"></div></div>
+                            <div class="vital-row">
+                                <span class="vital-label">Confidence</span>
+                                <span id="vitalConfidence" class="vital-value">--</span>
+                                <span class="vital-unit">%</span>
+                            </div>
+                            <div class="vital-bar"><div id="confidenceBar" class="vital-fill conf" style="width:0%"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="card full-width">
+                        <div class="card-header">
+                            <h3>CSI Signal</h3>
+                            <div class="card-actions">
+                                <span id="signalStrength" class="signal-str">-45 dBm</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="csiCanvas" height="150"></canvas>
+                            <div class="csi-metrics">
+                                <div><span class="metric-label">Subcarriers</span><span class="metric-val">30</span></div>
+                                <div><span class="metric-label">Freq</span><span class="metric-val">2.4 GHz</span></div>
+                                <div><span class="metric-label">Latency</span><span class="metric-val" id="latencyVal">12 ms</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card full-width">
+                        <div class="card-header">
+                            <h3>Detected Persons</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="personsList" class="persons-list">
+                                <div class="empty-state">No persons detected</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Through-Wall</h3>
+                        </div>
+                        <div class="card-body center">
+                            <div class="stat-circle">
+                                <span id="wallRange" class="stat-circle-value">5m</span>
+                                <span class="stat-circle-label">Range</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Accuracy</h3>
+                        </div>
+                        <div class="card-body center">
+                            <div class="stat-circle">
+                                <span id="accuracyVal" class="stat-circle-value">87.2%</span>
+                                <span class="stat-circle-label">AP@50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vitals -->
+            <section id="page-vitals" class="page">
+                <div class="page-header">
+                    <h2>Vital Signs Monitor</h2>
+                </div>
+                <div class="vitals-grid">
+                    <div class="card">
+                        <div class="card-header"><h3>Breathing Waveform</h3></div>
+                        <div class="card-body">
+                            <canvas id="breathingCanvas" height="120"></canvas>
+                            <div class="vital-big">
+                                <span id="breathingBig" class="vital-big-value">--</span>
+                                <span class="vital-big-unit">BPM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>Heart Rate Waveform</h3></div>
+                        <div class="card-body">
+                            <canvas id="heartCanvas" height="120"></canvas>
+                            <div class="vital-big">
+                                <span id="heartBig" class="vital-big-value heart-color">--</span>
+                                <span class="vital-big-unit">BPM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card full-width">
+                        <div class="card-header"><h3>Vital Signs History</h3></div>
+                        <div class="card-body">
+                            <canvas id="vitalsHistoryCanvas" height="160"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hardware -->
+            <section id="page-hardware" class="page">
+                <div class="page-header">
+                    <h2>Hardware</h2>
+                </div>
+                <div class="hardware-grid">
+                    <div class="card">
+                        <div class="card-header"><h3>ESP32-S3 Node</h3><span class="badge badge-live">$9</span></div>
+                        <div class="card-body">
+                            <div class="hw-specs">
+                                <div class="spec"><span class="spec-label">Chip</span><span class="spec-val">Xtensa dual-core</span></div>
+                                <div class="spec"><span class="spec-label">Flash</span><span class="spec-val">8MB</span></div>
+                                <div class="spec"><span class="spec-label">Role</span><span class="spec-val">WiFi CSI sensing</span></div>
+                                <div class="spec"><span class="spec-label">Frequency</span><span class="spec-val">2.4GHz ± 20MHz</span></div>
+                                <div class="spec"><span class="spec-label">Subcarriers</span><span class="spec-val">30</span></div>
+                                <div class="spec"><span class="spec-label">Sampling</span><span class="spec-val">100 Hz</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>ESP32-C6 + mmWave</h3><span class="badge badge-pro">$15</span></div>
+                        <div class="card-body">
+                            <div class="hw-specs">
+                                <div class="spec"><span class="spec-label">Chip</span><span class="spec-val">RISC-V + 60 GHz FMCW</span></div>
+                                <div class="spec"><span class="spec-label">Sensor</span><span class="spec-val">Seeed MR60BHA2</span></div>
+                                <div class="spec"><span class="spec-label">Role</span><span class="spec-val">mmWave HR/BR/presence</span></div>
+                                <div class="spec"><span class="spec-label">Privacy</span><span class="spec-val">No camera, no cloud</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>HLK-LD2410</h3><span class="badge badge-pro">$3</span></div>
+                        <div class="card-body">
+                            <div class="hw-specs">
+                                <div class="spec"><span class="spec-label">Type</span><span class="spec-val">24 GHz FMCW</span></div>
+                                <div class="spec"><span class="spec-label">Role</span><span class="spec-val">Presence + distance</span></div>
+                                <div class="spec"><span class="spec-label">Cost</span><span class="spec-val">Ultra low-cost</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card full-width">
+                        <div class="card-header"><h3>Antenna Array</h3></div>
+                        <div class="card-body center">
+                            <div class="antenna-grid">
+                                <div class="antenna tx active" data-type="TX1">TX</div>
+                                <div class="antenna tx active" data-type="TX2">TX</div>
+                                <div class="antenna tx active" data-type="TX3">TX</div>
+                                <div class="antenna rx active" data-type="RX1">RX</div>
+                                <div class="antenna rx active" data-type="RX2">RX</div>
+                                <div class="antenna rx active" data-type="RX3">RX</div>
+                                <div class="antenna rx active" data-type="RX4">RX</div>
+                                <div class="antenna rx active" data-type="RX5">RX</div>
+                                <div class="antenna rx active" data-type="RX6">RX</div>
+                            </div>
+                            <div class="antenna-legend">
+                                <span><span class="dot tx-dot"></span> 3× TX</span>
+                                <span><span class="dot rx-dot"></span> 6× RX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About / Architecture -->
+            <section id="page-about" class="page">
+                <div class="page-header">
+                    <h2>How It Works</h2>
+                </div>
+                <div class="about-content">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="about-intro">RuView turns commodity WiFi into a contactless sensor using <strong>Channel State Information (CSI)</strong> — the same radio reflections WiFi uses to optimize its own signal.</p>
+                        </div>
+                    </div>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h3>CSI Collection</h3>
+                                <p>$9 ESP32-S3 boards capture WiFi Channel State Information from ambient router signals</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h3>Phase Sanitization</h3>
+                                <p>Hardware noise is removed and signal phases are normalized across all 30 subcarriers</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h3>Signal Processing</h3>
+                                <p>Spatio-temporal analysis extracts motion, breathing, and heartbeat signals from RF perturbations</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">4</div>
+                            <div class="step-content">
+                                <h3>AI Inference</h3>
+                                <p>8 KB quantized neural network extracts pose keypoints, presence, and activity classification</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">5</div>
+                            <div class="step-content">
+                                <h3>Spatial Intelligence</h3>
+                                <p>Multi-node fusion enables through-wall tracking, vital signs, and environment mapping</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>Key Capabilities</h3></div>
+                        <div class="card-body">
+                            <div class="caps-list">
+                                <div class="cap-item"><span class="cap-name">Breathing Rate</span><span class="cap-val">6–30 BPM, real-time</span></div>
+                                <div class="cap-item"><span class="cap-name">Heart Rate</span><span class="cap-val">40–120 BPM, real-time</span></div>
+                                <div class="cap-item"><span class="cap-name">Presence Accuracy</span><span class="cap-val">100% validation</span></div>
+                                <div class="cap-item"><span class="cap-name">Pose Keypoints</span><span class="cap-val">17-keypoint estimation</span></div>
+                                <div class="cap-item"><span class="cap-name">Through-Wall Range</span><span class="cap-val">Up to 5m</span></div>
+                                <div class="cap-item"><span class="cap-name">Edge AI Model</span><span class="cap-val">8 KB (4-bit quantized)</span></div>
+                                <div class="cap-item"><span class="cap-name">Inference Speed</span><span class="cap-val">&lt; 1 ms</span></div>
+                                <div class="cap-item"><span class="cap-name">Total BOM</span><span class="cap-val">$140 full system</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings -->
+            <section id="page-settings" class="page">
+                <div class="page-header">
+                    <h2>Settings</h2>
+                </div>
+                <div class="settings-list">
+                    <div class="card">
+                        <div class="card-header"><h3>Sensing</h3></div>
+                        <div class="card-body">
+                            <div class="setting">
+                                <div><span class="setting-label">Scan Interval</span><span class="setting-desc">How often to sample CSI data</span></div>
+                                <select id="scanInterval" class="setting-select">
+                                    <option value="50">50 ms (fast)</option>
+                                    <option value="100" selected>100 ms (normal)</option>
+                                    <option value="200">200 ms (power save)</option>
+                                </select>
+                            </div>
+                            <div class="setting">
+                                <div><span class="setting-label">Detection Sensitivity</span></div>
+                                <input type="range" id="sensitivity" min="0.1" max="0.9" step="0.1" value="0.5">
+                            </div>
+                            <div class="setting">
+                                <div><span class="setting-label">Simulated Data</span></div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="simulatedToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><h3>Display</h3></div>
+                        <div class="card-body">
+                            <div class="setting">
+                                <div><span class="setting-label">Dark Mode</span></div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="darkModeToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting">
+                                <div><span class="setting-label">Show Animations</span></div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="animationsToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Navigation -->
+        <nav id="bottomNav">
+            <button class="nav-item active" data-page="home" onclick="navigateTo('home')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" data-page="dashboard" onclick="navigateTo('dashboard')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-item" data-page="vitals" onclick="navigateTo('vitals')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <span>Vitals</span>
+            </button>
+            <button class="nav-item" data-page="hardware" onclick="navigateTo('hardware')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <span>Hardware</span>
+            </button>
+            <button class="nav-item" data-page="settings" onclick="navigateTo('settings')">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                <span>Settings</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
