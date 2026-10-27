@@ -139,7 +139,8 @@ function updateFromDevices() {
         !d.ip.endsWith('.1') &&
         !d.ip.endsWith('.254') &&
         d.ip !== localIP
-    );
+    // Detection Sensitivity setting: higher sensitivity keeps weaker signals.
+    ).filter(d => (d.signal?.score || 0) >= (1 - APP.state.sensitivity) * 100);
 
     const now = Date.now();
 
