@@ -2,7 +2,7 @@
     "name": "RuView — WiFi Spatial Intelligence",
     "short_name": "RuView",
     "description": "Turn WiFi into spatial intelligence. Detect people, measure vitals, track movement through walls.",
-    "start_url": "/",
+    "start_url": "./",
     "display": "standalone",
     "background_color": "#0a0e17",
     "theme_color": "#0a0e17",

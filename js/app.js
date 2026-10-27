@@ -122,6 +122,10 @@ function updateStatusUI() {
         dsEl.textContent = APP.state.connected ? 'LIVE' : 'SIMULATED';
         dsEl.className = `badge ${APP.state.connected ? 'badge-live' : 'badge-sim'}`;
     }
+
+    // The fallback above can switch modes without touching the toggle.
+    const simToggle = document.getElementById('simulatedToggle');
+    if (simToggle) simToggle.checked = APP.state.simulated;
 }
 
 // === PROCESS REAL DEVICES ===
@@ -135,7 +139,8 @@ function updateFromDevices() {
         !d.ip.endsWith('.1') &&
         !d.ip.endsWith('.254') &&
         d.ip !== localIP
-    );
+    // Detection Sensitivity setting: higher sensitivity keeps weaker signals.
+    ).filter(d => (d.signal?.score || 0) >= (1 - APP.state.sensitivity) * 100);
 
     const now = Date.now();
 
@@ -682,8 +687,17 @@ function updatePersonsList(persons, count) {
 
 // === SETTINGS ===
 function initSettings() {
+    const simToggle = document.getElementById('simulatedToggle');
     const darkToggle = document.getElementById('darkModeToggle');
     const animToggle = document.getElementById('animationsToggle');
+
+    if (simToggle) {
+        simToggle.checked = APP.state.simulated;
+        simToggle.addEventListener('change', () => {
+            APP.state.simulated = simToggle.checked;
+            updateStatusUI();
+        });
+    }
     const scanInterval = document.getElementById('scanInterval');
     const sensitivity = document.getElementById('sensitivity');
 
@@ -704,8 +718,10 @@ function initSettings() {
     }
 
     if (scanInterval) {
+        scanInterval.value = String(APP.state.scanInterval);
         scanInterval.addEventListener('change', () => {
             APP.state.scanInterval = parseInt(scanInterval.value);
+            startMainLoop();
         });
     }
 
@@ -736,8 +752,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Connect to real backend
     connectWebSocket();
 
-    // Main loop — updates UI every 200ms
-    setInterval(() => {
+    // Main loop — update rate comes from the Scan Interval setting
+    startMainLoop();
+});
+function startMainLoop() {
+    if (APP.state.mainLoopTimer) clearInterval(APP.state.mainLoopTimer);
+    APP.state.mainLoopTimer = setInterval(() => {
         if (APP.state.simulated) {
             runSimulatedTick();
         }
@@ -753,8 +773,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (APP.state.vitalsHistory.length > 120) APP.state.vitalsHistory.shift();
 
         updateUI();
-    }, 200);
-});
+    }, APP.state.scanInterval);
+}
 
 // Register service worker
 if ('serviceWorker' in navigator) {
