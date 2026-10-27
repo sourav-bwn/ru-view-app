@@ -1,10 +1,12 @@
-const CACHE = 'ruview-v1';
+const CACHE = 'ruview-v2';
+// Relative paths: the app is also hosted under a sub-path (GitHub Pages
+// project site), where '/index.html' would cache the domain root instead.
 const ASSETS = [
-    '/',
-    '/index.html',
-    '/css/style.css',
-    '/js/app.js',
-    '/manifest.json'
+    './',
+    'index.html',
+    'css/style.css',
+    'js/app.js',
+    'manifest.json'
 ];
 
 self.addEventListener('install', e => {
